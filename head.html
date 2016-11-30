@@ -4,14 +4,38 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,target-densitydpi=device-dpi"/>
 <style>
+	html,body{
+	overflow:hidden;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	border:0;
+	}
 </style>
 <script>
 	function init(){
-		alert("hello world");
+		var canvas=initFullScreenCanvas("mainCanvas");
+	}
+	/*
+	resize the canvas size when change the window size
+	*/
+	function initFullScreenCanvas(canvasId){
+	var canvas=document.getElementById(canvasId);
+	resizeCanvas(canvas);
+	window.addEventListener("resize",function(){
+		resizeCanvas(canvas);
+	})
+	return canvas;
+	}
+	function resizeCanvas(canvas){
+		canvas.width=document.width || document.body.clientWidth;
+		canvas.height=document.height || document.body.clientHeight;
+		//通知游戏的主类画布大小已经重新调整
 	}
 </script>
 </head>
 <body onload="init()">
-
+	<canvas id="mainCanvas" width="100" height="100"></canvas>
 </body>
 </html>
