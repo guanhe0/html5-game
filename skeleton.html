@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,target-densitydpi=device-dpi"/>
+<style>
+	html,body{
+	overflow:hidden;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	border:0;
+	}
+</style>
+<script>
+	var g_canvas;
+	var g_ctx;
+	
+	function init(){
+		g_canvas=initFullScreenCanvas("mainCanvas");
+		g_ctx = g_canvas.getContext("2d");
+		repaint();
+	}
+	/*
+	resize the canvas size when change the window size
+	*/
+	function initFullScreenCanvas(canvasId){
+	var canvas=document.getElementById(canvasId);
+	resizeCanvas(canvas);
+	window.addEventListener("resize",function(){
+		resizeCanvas(canvas);
+	})
+	return canvas;
+	}
+	function resizeCanvas(canvas){
+		canvas.width=document.width || document.body.clientWidth;
+		canvas.height=document.height || document.body.clientHeight;
+		//通知游戏的主类画布大小已经重新调整
+		repaint();
+	}
+	function repaint(){
+		if(!g_ctx)
+		return;
+		
+		//清除背景
+		g_ctx.fillStyle = "white";
+		g_ctx.fillRect(0,0,g_canvas.width,g_canvas.height);
+		
+		reorient();
+		g_ctx.fillStyle = "darkgreen";
+		g_ctx.fillRect(10,10,250,30);
+	}
+	function reorient(){
+		var angle = window.orientation;
+		if(angle){
+			var rot = -Math.PI(angle/180);
+			g_ctx.translate(angle == -90 ? g_canvas.width : 0,angle == 90 ? g_canvas.height : 0);
+			g_ctx.rotate(rot);
+		}
+	}
+</script>
+</head>
+<body onload="init()">
+	<canvas id="mainCanvas" width="100" height="100"></canvas>
+</body>
+</html>
