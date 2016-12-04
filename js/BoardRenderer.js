@@ -123,3 +123,16 @@ _p._drawToken = function(cellX,cellY){
 	ctx.fill();
 	ctx.restore();
 }
+_p._repaint = function(){
+	this._ctx.save();
+	this._ctx.translate(this._x,this._y);
+	this._drawBackground();
+	this._drawGrid();
+	this._ctx.restore();
+	
+	for(var i = 0; i < this._cols; i++){
+		for(var j = 0; j < this._rows; j++){
+			this._drawToken(i,j);
+		}
+	}
+}
