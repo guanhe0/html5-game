@@ -65,8 +65,8 @@ _p._drawGrid = function(){
 	ctx.beginPath();
 	//绘制垂直线
 	for(var i = 0; i <= this._cols; i++){
-		ctx.moveTo(i*this._cols + 0.5,0.5);
-		ctx.lineTo(i*this._cols + 0.5,this._height + 0.5);
+		ctx.moveTo(i*this._cellSize + 0.5,0.5);
+		ctx.lineTo(i*this._cellSize + 0.5,this._height + 0.5);
 	}
 	//绘制水平线
 	for(var j = 0; j <= this._rows; j++){
@@ -76,7 +76,7 @@ _p._drawGrid = function(){
 	ctx.strokeStyle = "#ccc";
 	ctx.stroke();
 }
-_p._drawToken = function(cellX,cellY){
+_p._drawToken_d = function(cellX,cellY){
 	var ctx = this._ctx;
 	var cellSize = this._cellSize;
 	var tokenType = this._model.getPiece(cellX,cellY);
@@ -132,7 +132,7 @@ _p._repaint = function(){
 	
 	for(var i = 0; i < this._cols; i++){
 		for(var j = 0; j < this._rows; j++){
-			this._drawToken(i,j);
+			this._drawToken_d(i,j);
 		}
 	}
 }
