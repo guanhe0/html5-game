@@ -23,7 +23,7 @@ _p._getBoardRect = function(){
 	var boardWidth = cellSize*cols;
 	var boardHeight = cellSize*rows;
 	
-	return{
+	return{//棋盘左上角位置和cellSize
 		x:Math.floor((this._canvas.width - boardWidth)/2),
 		y:Math.floor((this._canvas.height - boardHeight)/2),
 		cellSize:cellSize
@@ -54,12 +54,12 @@ _p.handleClick = function(x,y){
 		this._reset();
 	}
 }
-_p._reset = function(){
+_p._reset = function(){//游戏重置，包括游戏绘制重置，游戏数据重置
 	this._clearCanvas();
 	this._boardModel.reset();
 	this._boardRenderer.repaint();
 };
-_p._clearCanvas = function(){
+_p._clearCanvas = function(){//填充canvas 矩形
 	this._ctx.fillStyle = "white";
 	this._ctx.fillRect(0,0,this._canvas.width,this._canvas.height);
 }
