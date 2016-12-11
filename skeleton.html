@@ -14,13 +14,13 @@
 	}
 </style>
 <script>
-	var g_game;
-	var g_canvas;
-	var g_ctx;
+	var g_game;//定义游戏实例
+	var g_canvas;//定义全局游戏画布
+	var g_ctx;//定义全局画笔
 	
 	function init(){
-		g_canvas=initFullScreenCanvas("mainCanvas");
-		g_game = new Game();
+		g_canvas=initFullScreenCanvas("mainCanvas");//主要有repaint,重新获取canvas宽高,repaint,注册窗口大小变化侦听事件
+		g_game = new Game();//
 		
 		if(isTouchDevice){
 			canvas.addEventListener("touchstart",function(e){
