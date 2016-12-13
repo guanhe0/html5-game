@@ -15,6 +15,7 @@ function BoardRenderer(context,model){
 	this._cellSize = 0;
 }
 _p = BoardRenderer.prototype;
+/*
 //定义半径
 var radius = cellSize*0.4;
 //渐变圆心
@@ -24,7 +25,7 @@ var gradientY = -cellSize*0.1;
 var gradient = ctx.createRadialGradient(
 gradientX,gradientY,cellSize*0.1,//内圆
 gradientX,gradientY,radius*1.2);//外圆
-
+*/
 //设置游戏中的UI参数，画布上游戏的位置和单元格大小
 _p.setSize = function(x,y,cellSize){
 	this._x = x;

@@ -107,7 +107,7 @@ _p._getGameState = function(column,row){//获取游戏状态，平局或者还�
 	
 	for(var deltaX = -1;deltaX < 2; deltaX++){
 		for(var deltaY = -1;deltaY < 2; deltaY++){
-			if(deltaX == 0 && deltaY = 0)
+			if(deltaX == 0 && deltaY == 0)
 				continue;
 			var count = this._checkWinDirection(column,row,deltaX,deltaY)
 			+ this._checkWinDirection(column,row,-deltaX,-deltaY) + 1;
