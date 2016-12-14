@@ -13,11 +13,9 @@
 	border:0;
 	}
 </style>
-<script>
-	console.log("hello world");
-</script>
-<script src="./js/Game.js"></script>
-<script>
+<script type = "text/javascript" src="./js/Game.js" ></script>
+<script type = "text/javascript">
+	
 	var g_game;//定义游戏实例
 	var g_canvas;//定义全局游戏画布
 	var g_ctx;//定义全局画笔
@@ -26,8 +24,8 @@
 		g_canvas=initFullScreenCanvas("mainCanvas");//主要有repaint,重新获取canvas宽高,repaint,注册窗口大小变化侦听事件
 		g_game = new Game(g_canvas);//
 		
-		if(isTouchDevice){
-			canvas.addEventListener("touchstart",function(e){
+		if(isTouchDevice()){
+			g_canvas.addEventListener("touchstart",function(e){
 				var touch = event.targetTouches[0];
 				g_game.handleClick(touch.pageX,touch.pageY);
 				e.stopPropagation();
@@ -35,7 +33,7 @@
 			},false);
 		}
 		else{
-			canvas.addEventListener("mouseup",function(){
+			g_canvas.addEventListener("mouseup",function(){
 				g_game.handleClick(e.pageX,e.pageY);
 				e.stopPropagation();
 				e.preventDefault();
@@ -49,7 +47,7 @@
 	*/
 	function initFullScreenCanvas(canvasId){
 	var canvas=document.getElementById(canvasId);
-	resizeCanvas(canvas);
+//	resizeCanvas(canvas);
 	window.addEventListener("resize",function(){
 		resizeCanvas(canvas);
 	})
@@ -86,8 +84,8 @@
 		return('ontouchstart' in document.documentElement);
 	}
 </script>
-<script src="./js/BoardRenderer.js"></script>
-<script src="./js/BoardModel.js"></script>
+<script type = "text/javascript" src="./js/BoardRenderer.js" ></script>
+<script type = "text/javascript" src="./js/BoardModel.js" ></script>
 
 </head>
 <body onload="init()">

@@ -1,3 +1,4 @@
+
 function Game(canvas){
 	this._boardRect = null;
 	this._canvas = canvas;
@@ -11,8 +12,8 @@ _p = Game.prototype;
 _p.handleResize = function(){
 	this._clearCanvas();
 	this._boardRect = this._getBoardRect();
-	this._boardRenderer.setSize(this._boardRect.x,this._boardRect.y,this._boardRect.cellSize);
-	this._boardRenderer.repaint();
+	this._boardRenderer._setSize(this._boardRect.x,this._boardRect.y,this._boardRect.cellSize);
+	this._boardRenderer._repaint();
 }
 _p._getBoardRect = function(){
 	var cols = this._boardModel.getCols();

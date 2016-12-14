@@ -27,7 +27,7 @@ gradientX,gradientY,cellSize*0.1,//内圆
 gradientX,gradientY,radius*1.2);//外圆
 */
 //设置游戏中的UI参数，画布上游戏的位置和单元格大小
-_p.setSize = function(x,y,cellSize){
+_p._setSize = function(x,y,cellSize){
 	this._x = x;
 	this._y = y;
 	this._cellSize = cellSize;
@@ -39,8 +39,8 @@ _p._drawBackground = function(){
 	
 	//background
 	var gradient = ctx.createLinearGradient(0,0,0,this._height);
-	gradient.addColorStop(0,"#fffb3");
-	gradient.addColorStop(1,"f6f6b2");
+	gradient.addColorStop(0,"#fffbb3");
+	gradient.addColorStop(1,"#f6f6b2");
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0,0,this._width,this._height);
 	
