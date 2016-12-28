@@ -22,8 +22,10 @@
 	
 	function init(){
 		g_canvas=initFullScreenCanvas("mainCanvas");//主要有repaint,重新获取canvas宽高,repaint,注册窗口大小变化侦听事件
+		g_ctx = g_canvas.getContext("2d");
+		resizeCanvas(g_canvas);
 		g_game = new Game(g_canvas);//
-		
+	//	alert(g_game._getBoardRect()["cellSize"]);
 		if(isTouchDevice()){
 			g_canvas.addEventListener("touchstart",function(e){
 				var touch = event.targetTouches[0];
@@ -33,57 +35,75 @@
 			},false);
 		}
 		else{
-			g_canvas.addEventListener("mouseup",function(){
+			g_canvas.addEventListener("mouseup",function(e){
 				g_game.handleClick(e.pageX,e.pageY);
 				e.stopPropagation();
 				e.preventDefault();
 			},false)
 		}
-		g_ctx = g_canvas.getContext("2d");
+		
 		repaint();
 	}
 	/*
 	resize the canvas size when change the window size
 	*/
+	//debug
+
 	function initFullScreenCanvas(canvasId){
 	var canvas=document.getElementById(canvasId);
 //	resizeCanvas(canvas);
-	window.addEventListener("resize",function(){
+	
+	window.addEventListener("resize",function(e){
 		resizeCanvas(canvas);
-	})
+		e.stopPropagation();
+		e.preventDefault();
+	},false)
 	return canvas;
 	}
 	function resizeCanvas(canvas){
 		canvas.width=document.width || document.body.clientWidth;
 		canvas.height=document.height || document.body.clientHeight;
+		
+		repaint();
 		g_game && g_game.handleResize();
 		//通知游戏的主类画布大小已经重新调整
-		repaint();
+	
+		
+		
 	}
 	function repaint(){
-		if(!g_ctx)
-		return;
 		
+		if(!g_ctx){
+			alert("g_ctx is null")
+			return;
+		}
+		
+	
 		//清除背景
-		g_ctx.fillStyle = "white";
-		g_ctx.fillRect(0,0,g_canvas.width,g_canvas.height);
+	//	g_ctx.fillStyle = "white";
+	//	g_ctx.fillRect(0,0,g_canvas.width,g_canvas.height);
 		
 		reorient();
-		g_ctx.fillStyle = "darkgreen";
-		g_ctx.fillRect(10,10,250,30);
+		
+	//	g_ctx.fillStyle = "darkgreen";
+	//	alert("fillRect" + " fillStyle = " + g_ctx.fillStyle);
+	//	g_ctx.fillRect(0,0,g_canvas.width,g_canvas.height);
 	}
 	function reorient(){
 		var angle = window.orientation;
+		
 		if(angle){
 			var rot = -Math.PI(angle/180);
 			g_ctx.translate(angle == -90 ? g_canvas.width : 0,angle == 90 ? g_canvas.height : 0);
 			g_ctx.rotate(rot);
+			alert("reorient is ok")
 		}
 	}
 	function isTouchDevice(){
 		return('ontouchstart' in document.documentElement);
 	}
 </script>
+
 <script type = "text/javascript" src="./js/BoardRenderer.js" ></script>
 <script type = "text/javascript" src="./js/BoardModel.js" ></script>
 

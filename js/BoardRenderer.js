@@ -72,7 +72,7 @@ _p._drawGrid = function(){
 	//绘制水平线
 	for(var j = 0; j <= this._rows; j++){
 		ctx.moveTo(0.5,j*this._cellSize + 0.5);
-		ctx.moveTo(this._width + 0.5,j*this._cellSize + 0.5);
+		ctx.lineTo(this._width + 0.5,j*this._cellSize + 0.5);
 	}
 	ctx.strokeStyle = "#ccc";
 	ctx.stroke();
@@ -125,6 +125,7 @@ _p._drawToken_d = function(cellX,cellY){
 	ctx.restore();
 }
 _p._repaint = function(){
+	
 	this._ctx.save();
 	this._ctx.translate(this._x,this._y);
 	this._drawBackground();
