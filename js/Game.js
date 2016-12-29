@@ -33,14 +33,15 @@ _p._getBoardRect = function(){
 _p.handleClick = function(x,y){
 	//获取列的索引
 	var column = Math.floor((x-this._boardRect.x)/this._boardRect.cellSize);
-	
+	var row = Math.floor((y-this._boardRect.y)/this._boardRect.cellSize);
+	console.log("column = " + column);
 	//生成回合并检查效果
-	var turn = this._boardModel.makeTurn(column);
+	var turn = this._boardModel.makeTurn(column,row);
 	
 	//如果回合无效，则更新游戏盘
 	//绘制新球
 	if(turn.status != BoardModel.ILLEGAL_TURN){
-		this._boardRenderer.drawToken(turn.x,turn.y);
+		this._boardRenderer._drawToken_d(turn.x,turn.y);
 	}
 	
 	//上一回合过后有没有产生赢家？

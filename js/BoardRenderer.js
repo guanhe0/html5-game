@@ -81,6 +81,7 @@ _p._drawToken_d = function(cellX,cellY){
 	var ctx = this._ctx;
 	var cellSize = this._cellSize;
 	var tokenType = this._model.getPiece(cellX,cellY);
+//	var tokenType = this._model._currentPlayer;
 	
 	if(!tokenType){
 		return;
@@ -88,14 +89,14 @@ _p._drawToken_d = function(cellX,cellY){
 	
 	var colorCode = "black";
 	switch(tokenType){
-		case BoardModel.RED:
+		case cBoardModel.RED:
 			colorCode = "red";
 			break;
-		case BoardModel.GREEN:
+		case cBoardModel.GREEN:
 			colorCode = "green";
 			break;
 	}
-	
+	console.log("colorCode = " + colorCode);
 	//标记圆心
 	var x = this._x + (cellX + 0.5)*cellSize;
 	var y = this._y + (cellY + 0.5)*cellSize;
