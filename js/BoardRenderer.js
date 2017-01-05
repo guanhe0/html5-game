@@ -38,6 +38,7 @@ _p._drawBackground = function(){
 	var ctx = this._ctx;
 	
 	//background
+	
 	var gradient = ctx.createLinearGradient(0,0,0,this._height);
 	gradient.addColorStop(0,"#fffbb3");
 	gradient.addColorStop(1,"#f6f6b2");
@@ -60,6 +61,7 @@ _p._drawBackground = function(){
 	ctx.moveTo(co,0);
 	ctx.bezierCurveTo(this._width + co * 3,this._height + co,-co*3,this._height + co,this._width - co,0);
 	ctx.fill();
+	
 }
 _p._drawGrid = function(){
 	var ctx = this._ctx;
@@ -96,7 +98,7 @@ _p._drawToken_d = function(cellX,cellY){
 			colorCode = "green";
 			break;
 	}
-	console.log("colorCode = " + colorCode);
+
 	//标记圆心
 	var x = this._x + (cellX + 0.5)*cellSize;
 	var y = this._y + (cellY + 0.5)*cellSize;
@@ -124,6 +126,7 @@ _p._drawToken_d = function(cellX,cellY){
 	ctx.arc(0,0,radius,0,2*Math.PI,true);
 	ctx.fill();
 	ctx.restore();
+	
 }
 _p._repaint = function(){
 	

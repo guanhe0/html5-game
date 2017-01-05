@@ -59,7 +59,7 @@ _p.makeTurn = function(column,row){
 	//发现空行，所以可以放置小球
 	this._totalTokens++;
 	this._data[row][column] = piece;
-	console.log("piece = " + piece);
+	
 	//轮到下一玩家
 	this._toggleCurrentPlayer();
 	//将游戏的回合验证和新的游戏状态一起返回
@@ -113,9 +113,11 @@ _p._getGameState = function(column,row){//获取游戏状态，平局或者还�
 			+ this._checkWinDirection(column,row,-deltaX,-deltaY) + 1;
 			
 			if(count >= 4){
+				
 				return cBoardModel.WIN;
 			}
 		}
 	}
+	
 	return cBoardModel.NONE;
 }
