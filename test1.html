@@ -1,0 +1,26 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+var f = function(){
+	this.fname = 'F function'
+}
+f.prototype.sayName = function(){
+	alert(window == this)
+	alert(this.fname)
+}
+f.prototype.bar = function(){
+	setTimeout(this.sayName,1000)
+}
+f.prototype.bar2 = function(){
+	var that = this;
+	setTimeout(function(){that.sayName()},1000)
+}
+var ins = new f();
+ins.bar();
+ins.bar2();
+</script>
+<canvas id="mainCanvas" width="1000" height="1000"></canvas>
+</body>
+</html>
