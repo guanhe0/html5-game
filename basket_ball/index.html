@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,target-densitydpi=device-dpi"/>
+</head>
+<body>
+<script>
+var width = window.innerWidth;  
+var height= window.innerHeight;  
+var container = document.createElement( 'div' );  
+document.body.appendChild( container );  
+var webglcanvas = document.createElement('canvas');               
+container.appendChild(webglcanvas);   
+var gl = webglcanvas.getContext("experimental-webgl"); //工具集               
+
+function updateFrame () {             
+  gl.viewport ( 0, 0, width, height );  
+        gl.clearColor(0, 0.0, 1.0, 0.6); //第一条语句表示清除颜色设为黑色,参数依次为红，绿，蓝，透明度
+        gl.clear ( gl.COLOR_BUFFER_BIT );  //第二条语句表示把整个窗口清除为当前的清除颜色     
+         setTimeout(   
+    function(){updateFrame();console.log("timer inner")},  
+            200); 
+     }  
+
+setTimeout(   
+  function(){
+    updateFrame();console.log("timer")
+  },  
+200);  
+</script>
+</body>
+</html>
