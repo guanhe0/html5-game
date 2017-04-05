@@ -35,7 +35,7 @@ _p.getCols = function(){
 _p.getRows = function(){
 	return this._rows;
 };
-_p.makeTurn = function(column){
+_p.makeTurn = function(column,row){
 	//我们正放置的小球颜色
 	var piece = this._currentPlayer;
 	
@@ -49,13 +49,13 @@ _p.makeTurn = function(column){
 	//检查指定列上没有空行
 	//如果没有空行
 	//则回合无效
-	var row = this._getEmptyRow(column);
-	if(row == -1){
+	//var row = this._getEmptyRow(column);
+	if(this.getPiece(column,row)){
 		return{
 			status:cBoardModel.ILLEGAL_TURN
 		}
 	}
-	
+		
 	//发现空行，所以可以放置小球
 	this._totalTokens++;
 	this._data[row][column] = piece;
@@ -107,15 +107,17 @@ _p._getGameState = function(column,row){//获取游戏状态，平局或者还�
 	
 	for(var deltaX = -1;deltaX < 2; deltaX++){
 		for(var deltaY = -1;deltaY < 2; deltaY++){
-			if(deltaX == 0 && deltaY = 0)
+			if(deltaX == 0 && deltaY == 0)
 				continue;
 			var count = this._checkWinDirection(column,row,deltaX,deltaY)
 			+ this._checkWinDirection(column,row,-deltaX,-deltaY) + 1;
 			
 			if(count >= 4){
+				
 				return cBoardModel.WIN;
 			}
 		}
 	}
+	
 	return cBoardModel.NONE;
 }

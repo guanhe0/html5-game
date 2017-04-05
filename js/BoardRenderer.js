@@ -15,6 +15,7 @@ function BoardRenderer(context,model){
 	this._cellSize = 0;
 }
 _p = BoardRenderer.prototype;
+/*
 //定义半径
 var radius = cellSize*0.4;
 //渐变圆心
@@ -24,9 +25,9 @@ var gradientY = -cellSize*0.1;
 var gradient = ctx.createRadialGradient(
 gradientX,gradientY,cellSize*0.1,//内圆
 gradientX,gradientY,radius*1.2);//外圆
-
+*/
 //设置游戏中的UI参数，画布上游戏的位置和单元格大小
-_p.setSize = function(x,y,cellSize){
+_p._setSize = function(x,y,cellSize){
 	this._x = x;
 	this._y = y;
 	this._cellSize = cellSize;
@@ -37,9 +38,10 @@ _p._drawBackground = function(){
 	var ctx = this._ctx;
 	
 	//background
+	
 	var gradient = ctx.createLinearGradient(0,0,0,this._height);
-	gradient.addColorStop(0,"#fffb3");
-	gradient.addColorStop(1,"f6f6b2");
+	gradient.addColorStop(0,"#fffbb3");
+	gradient.addColorStop(1,"#f6f6b2");
 	ctx.fillStyle = gradient;
 	ctx.fillRect(0,0,this._width,this._height);
 	
@@ -59,6 +61,7 @@ _p._drawBackground = function(){
 	ctx.moveTo(co,0);
 	ctx.bezierCurveTo(this._width + co * 3,this._height + co,-co*3,this._height + co,this._width - co,0);
 	ctx.fill();
+	
 }
 _p._drawGrid = function(){
 	var ctx = this._ctx;
@@ -71,7 +74,7 @@ _p._drawGrid = function(){
 	//绘制水平线
 	for(var j = 0; j <= this._rows; j++){
 		ctx.moveTo(0.5,j*this._cellSize + 0.5);
-		ctx.moveTo(this._width + 0.5,j*this._cellSize + 0.5);
+		ctx.lineTo(this._width + 0.5,j*this._cellSize + 0.5);
 	}
 	ctx.strokeStyle = "#ccc";
 	ctx.stroke();
@@ -80,6 +83,7 @@ _p._drawToken_d = function(cellX,cellY){
 	var ctx = this._ctx;
 	var cellSize = this._cellSize;
 	var tokenType = this._model.getPiece(cellX,cellY);
+//	var tokenType = this._model._currentPlayer;
 	
 	if(!tokenType){
 		return;
@@ -87,14 +91,14 @@ _p._drawToken_d = function(cellX,cellY){
 	
 	var colorCode = "black";
 	switch(tokenType){
-		case BoardModel.RED:
+		case cBoardModel.RED:
 			colorCode = "red";
 			break;
-		case BoardModel.GREEN:
+		case cBoardModel.GREEN:
 			colorCode = "green";
 			break;
 	}
-	
+
 	//标记圆心
 	var x = this._x + (cellX + 0.5)*cellSize;
 	var y = this._y + (cellY + 0.5)*cellSize;
@@ -122,8 +126,10 @@ _p._drawToken_d = function(cellX,cellY){
 	ctx.arc(0,0,radius,0,2*Math.PI,true);
 	ctx.fill();
 	ctx.restore();
+	
 }
 _p._repaint = function(){
+	
 	this._ctx.save();
 	this._ctx.translate(this._x,this._y);
 	this._drawBackground();
